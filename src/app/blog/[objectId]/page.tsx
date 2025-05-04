@@ -1,30 +1,34 @@
 import Image from "next/image";
 
-type Props = {
-  params: {
-    objectId: string;
-  };
-};
+interface CharacterData {
+  characters: string;
+  previewCharacters: string;
+  imagePreview: string;
+  fullDescription: string;
+  characterImage: string;
+  objectId: string;
+  created: number;
+  updated: number;
+  background: string;
+  genderCategory: { gender: string };
+}
 
-export default async function FilledCharacters({ params }: Props) {
-  const { objectId } = params;
+export default async function FilledCharacters({
+  params,
+}: {
+  params: Promise<{ objectId: string }>;
+}) {
+  const { objectId } = await params;
 
   const res = await fetch(
     `https://sensualdrop-us.backendless.app/api/data/Characters/${objectId}?loadRelations=genderCategory`
   );
 
-  const data: {
-    characters: string;
-    previewCharacters: string;
-    imagePreview: string;
-    fullDescription: string;
-    characterImage: string;
-    objectId: string;
-    created: number;
-    updated: number;
-    background: string;
-    genderCategory: { gender: string };
-  } = await res.json();
+  if (!res.ok) {
+    throw new Error("Failed to fetch character data");
+  }
+
+  const data: CharacterData = await res.json();
 
   return (
     <main>
