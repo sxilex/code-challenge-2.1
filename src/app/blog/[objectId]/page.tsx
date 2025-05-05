@@ -32,27 +32,26 @@ export default async function FilledCharacters({
 
   return (
     <main>
-      <section className="mx-auto w-screen min-h-screen bg-black">
-        <div className="w-screen h-screen relative overflow-hidden">
+      <section className="w-full min-h-screen bg-black">
+        <div className="relative w-full min-h-screen overflow-hidden">
           <Image
             src={data.background}
             alt="content-background"
-            width={10000}
-            height={10000}
+            fill
             className="object-cover opacity-40"
           />
-          <div className="grid grid-cols-2 justify-between top-16 absolute">
-            <div className="w-[86%] max-h-screen relative my-6 mr-6 ml-10">
+          <div className="relative top-16 grid grid-cols-1 md:grid-cols-2 gap-6 p-6 md:p-12">
+            <div className="w-full max-h-screen relative">
               <Image
                 src={data.characterImage}
                 alt="Hero Image"
-                width={100000}
-                height={100000}
-                className="object-cover"
+                width={800}
+                height={800}
+                className="object-cover w-full h-auto rounded-xl"
               />
             </div>
-            <div className="px-8 text-center flex flex-col gap-18 justify-center place-items-center">
-              <h1 className="mt-2 w-full min-h-10 text-7xl text-yellow-300 font-extrabold">
+            <div className="text-center flex flex-col gap-6 justify-center items-center px-4">
+              <h1 className="text-4xl md:text-7xl text-yellow-300 font-extrabold">
                 {data.characters}
               </h1>
               <span
@@ -60,11 +59,11 @@ export default async function FilledCharacters({
                   data.genderCategory?.gender === "Male"
                     ? "bg-blue-500 text-white"
                     : "bg-amber-300"
-                } text-lg font-mono border border-black w-fit px-4 rounded-3xl py-2`}
+                } text-md md:text-lg font-mono border border-black px-4 py-2 rounded-3xl`}
               >
                 {data.genderCategory?.gender ?? "Unknown"}
               </span>
-              <p className="text-yellow-200 text-2xl mt-[4px]">
+              <p className="text-yellow-200 text-lg md:text-2xl">
                 {data.fullDescription}
               </p>
             </div>
